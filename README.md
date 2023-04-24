@@ -5,7 +5,7 @@ live Site: https://juniperfawn.github.io/brainnest-library/
 
 Team Members:
 
--António José Mata Quaresma
--Cera Kocher
--Lucas Coutinho de Assis
--Kerry Jalal
+-António José Mata Quaresma<br>
+-Cera Kocher<br>
+-Lucas Coutinho de Assis<br>
+-Kerry Jalal<br>
