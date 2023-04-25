@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
+    <title>My Library</title>
+</head>
+<body>
+
+    <section class="form-section">
+        <h1>MY <br>LIBRARY</h1>
+        <P>HERE IS A PERSONAL DIGITAL LIBRARY FOR YOUR DAILY READS. THIS PLATFORM ALLOWS YOU TO 
+            KEEP TRACK OF WHAT YOU’VE READ OR ARE CURRENTLY READING.</P>
+        <form  action="#" method="post">
+            <label for="title">*BOOK TITLE:</label>
+            <input type="text" id="title" name="title" placeholder="Enter title of book" minlength="5" maxlength="20" required>
+
+            <label for="author">*AUTHOR:</label>
+            <input type="text" id="author" name="author" placeholder="Enter author of book" pattern="[A-Za-z]+" minlength="5" maxlength="20" required>
+                
+            <label for="language">*LANGUAGE:</label>
+            <input type="text" id="language" name="language" placeholder="Enter book language" pattern="[A-Za-z]+" minlength="3" maxlength="15" required>
+
+            <label for="pages">*NUMBER OF PAGES:</label>
+            <input type="number" id="pages" name="pages" placeholder="Enter total number of pages" minlength="1" maxlength="1500" required>
+                    
+            <div class="checkbox">
+              <label for="read">*DID YOU FINISH THIS BOOK?</label>
+              <input type="checkbox" id="read" name="read">
+            </div>
+        
+            <button type="submit" class="add-book_btn">ADD NEW BOOK</button>
+          </form>
+
+    </section>
+
+    <section class="counters-section">
+        <h3>TOTAL NUMBER OF BOOKS - <span>0</span></h3>
+        <img src="./images/star_black.png">
+        <h3>BOOKS READ - <span>0</span></h3>
+        <img src="./images/star_black.png">
+        <h3>UNREAD BOOKS - <span>0</span></h3>
+      </section>
+
+    <section class="library-section">
+        <div class="book-card">
+            <H2>LORD OF THE RINGS</H2>
+            <H3>BY J.R.R. TOLKIEN</H3>
+            <P>NUMBER OF PAGES - 1178</P>
+            <P>LANGUAGE - ENGLISH</P>
+            <button type="submit" class="book-edit_btn">EDIT BOOK</button>
+            <button type="submit" class="book-delete_btn">DELETE BOOK</button>
+        </div>
+        <div class="book-card">
+            <H2>LORD OF THE RINGS</H2>
+            <H3>BY J.R.R. TOLKIEN</H3>
+            <P>NUMBER OF PAGES - 1178</P>
+            <P>LANGUAGE - ENGLISH</P>
+            <button type="submit" class="book-edit_btn">EDIT BOOK</button>
+            <button type="submit" class="book-delete_btn">DELETE BOOK</button>
+         </div>
+        <div class="book-card">
+            <H2>LORD OF THE RINGS</H2>
+            <H3>BY J.R.R. TOLKIEN</H3>
+            <P>NUMBER OF PAGES - 1178</P>
+            <P>LANGUAGE - ENGLISH</P>
+            <button type="submit" class="book-edit_btn">EDIT BOOK</button>
+            <button type="submit" class="book-delete_btn">DELETE BOOK</button>
+        </div>
+    </section>
+</body>
+</html>
