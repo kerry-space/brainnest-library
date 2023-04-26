@@ -101,3 +101,22 @@ function removeBookFromLibrary(index) {
     // Update the counts in the counters section
     updateCounters();
   }
+
+
+//manage the counters for total books, read and unread books
+function updateCounters() {
+    const totalBooks = myLibrary.length;
+    const totalReadBooks = myLibrary.filter((book) => book.read).length;
+    const totalUnreadBooks = myLibrary.filter((book) => !book.read).length;
+  
+    const totalBooksCounter = document.querySelector('#total-books');
+    totalBooksCounter.textContent = totalBooks;
+  
+    const totalReadBooksCounter = document.querySelector('#total-read-books');
+    totalReadBooksCounter.textContent = totalReadBooks;
+  
+    const totalUnreadBooksCounter = document.querySelector('#total-unread-books');
+    totalUnreadBooksCounter.textContent = totalUnreadBooks;
+  }
+  
+  updateCounters();
