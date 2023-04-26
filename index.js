@@ -122,3 +122,24 @@ function updateCounters() {
   }
   
   updateCounters();
+
+  
+  function handleFormSubmit(event) {
+    event.preventDefault();
+  
+    addBookToLibrary();
+    displayBooks();
+  
+    // Clear the form inputs
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('pages').value = '';
+    document.getElementById('language').selectedIndex = 0;
+    document.getElementById('read').checked = false;
+  
+    updateCounters();
+  }
+  
+  // Add an event listener to the "ADD NEW BOOK" button to handle form submit
+  const addButtonElement = document.querySelector('.add-book-btn');
+  addButtonElement.addEventListener('click', handleFormSubmit);
