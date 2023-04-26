@@ -10,7 +10,9 @@ function Book(title, author, pages, language, read) {
   this.read = read;
 }
 
-
+Book.prototype.toggleReadStatus = function () {
+    this.read = !this.read;
+  };
 
 //Get the form input data to the library array
 function addBookToLibrary() {
