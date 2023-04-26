@@ -90,3 +90,14 @@ function displayBooks() {
 
 // Call the displayBooks function initially to display the book cards on the page
 displayBooks();
+
+function removeBookFromLibrary(index) {
+    // Remove the book at the specified index from the myLibrary array
+    myLibrary.splice(index, 1);
+  
+    // Re-render the book cards in the library section
+    displayBooks();
+  
+    // Update the counts in the counters section
+    updateCounters();
+  }
