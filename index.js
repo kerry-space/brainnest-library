@@ -11,8 +11,8 @@ function Book(title, author, pages, language, read) {
 }
 
 Book.prototype.toggleReadStatus = function () {
-    this.read = !this.read;
-  };
+  this.read = !this.read;
+};
 
 //Get the form input data to the library array
 function addBookToLibrary() {
@@ -23,7 +23,7 @@ function addBookToLibrary() {
   const language = document.getElementById('language').value;
   const read = document.getElementById('read').checked;
 
-  //validate data from 
+  //validate data from
   if (title.trim() === '' || author.trim() === '') {
     return;
   }
@@ -31,115 +31,170 @@ function addBookToLibrary() {
   // Create a new Book object with the user input
   const newBook = new Book(title, author, pages, language, read);
 
+  console.log(newBook);
   // Add the new Book object to the myLibrary array
   myLibrary.push(newBook);
 }
 
 //Render the book cards on the Library
-function displayBooks() {
-    const libraryContainer = document.getElementById('book-cards');
-  
-    libraryContainer.innerHTML = '';
-  
-    myLibrary.forEach((book, index) => {
-      const bookCard = document.createElement('div');
-      bookCard.classList.add('book-card');
-  
-      const title = document.createElement('h2');
-      title.textContent = book.title;
-      bookCard.appendChild(title);
-  
-      const author = document.createElement('h3');
-      author.textContent = `By: ${book.author}`;
-      bookCard.appendChild(author);
-  
-      const pages = document.createElement('p');
-      pages.textContent = `${book.pages} pages`;
-      bookCard.appendChild(pages);
-  
-      const language = document.createElement('p');
-      language.textContent = `Language: ${book.language}`;
-      bookCard.appendChild(language);
-  
-      const read = document.createElement('p');
-      read.textContent = book.read ? 'Read' : 'Unread';
-      bookCard.appendChild(read);
-  
-      const readButton = document.createElement('button');
-      readButton.classList.add('book-read-btn');
-      readButton.textContent = book.read ? 'Mark as unread' : 'Mark as read';
-      readButton.addEventListener('click', () => {
-        book.toggleReadStatus();
-        read.textContent = book.read ? 'Read' : 'Unread';
-        readButton.textContent = book.read ? 'Mark as unread' : 'Mark as read';
-  
-        updateCounters();
-      });
-      bookCard.appendChild(readButton);
-  
-      const removeButton = document.createElement('button');
-      removeButton.classList.add('book-remove-btn');
-      removeButton.textContent = 'Remove';
-      removeButton.setAttribute('data-index', index);
-      removeButton.addEventListener('click', removeBookFromLibrary);
-      bookCard.appendChild(removeButton);
-  
-      libraryContainer.appendChild(bookCard);
-    });
-  
-    updateCounters();
+function displayBooks(searchInput = '') {
+  const libraryContainer = document.getElementById('book-cards');
+
+  if (myLibrary.length === 0) {
+    // there are no books
+    libraryContainer.classList.remove('visible');
+    return;
+  } else {
+    libraryContainer.classList.add('visible');
   }
 
-// Call the displayBooks function initially to display the book cards on the page
+  libraryContainer.innerHTML = '';
+
+  // let searchBooks = searchInput 
+  //     ? myLibrary.filter((book) => book.title.includes(searchInput)) 
+  //     : myLibrary;
+
+  let searchBooks;
+
+  if(!searchInput){ //<-----------------working
+    searchBooks = myLibrary;
+  } else if(searchInput){ //<-----------------working
+    searchBooks = myLibrary.filter((book) => book.title.includes(searchInput));
+  }else if(searchInput === true || false){  //<------------ not working
+    searchBooks = myLibrary.filter((book) => (book.read === searchInput));
+  }
+
+  //output the books
+  searchBooks.forEach((book, index) => {
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('book-card');
+
+    const title = document.createElement('h2');
+    title.textContent = book.title;
+    bookCard.appendChild(title);
+
+    const author = document.createElement('h3');
+    author.textContent = `By: ${book.author}`;
+    bookCard.appendChild(author);
+
+    const pages = document.createElement('p');
+    pages.textContent = `${book.pages} pages`;
+    bookCard.appendChild(pages);
+
+    const language = document.createElement('p');
+    language.textContent = `Language: ${book.language}`;
+    bookCard.appendChild(language);
+
+    const read = document.createElement('p');
+    read.textContent = book.read ? 'Read' : 'Unread';
+    bookCard.appendChild(read);
+
+    const readButton = document.createElement('button');
+    readButton.classList.add('book-read-btn');
+    readButton.textContent = book.read ? 'Mark as unread' : 'Mark as read';
+    readButton.addEventListener('click', () => {
+      book.toggleReadStatus();
+      read.textContent = book.read ? 'Read' : 'Unread';
+      readButton.textContent = book.read ? 'Mark as unread' : 'Mark as read';
+
+      updateCounters();
+    });
+    bookCard.appendChild(readButton);
+
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('book-remove-btn');
+    removeButton.textContent = 'Remove';
+    removeButton.setAttribute('data-index', index);
+    removeButton.addEventListener('click', removeBookFromLibrary);
+    bookCard.appendChild(removeButton);
+
+    libraryContainer.appendChild(bookCard);
+  });
+
+  updateCounters();
+}
+
+// // Call the displayBooks function initially to display the book cards on the page
 displayBooks();
 
 function removeBookFromLibrary(index) {
-    // Remove the book at the specified index from the myLibrary array
-    myLibrary.splice(index, 1);
-  
-    // Re-render the book cards in the library section
-    displayBooks();
-  
-    // Update the counts in the counters section
-    updateCounters();
-  }
+  // Remove the book at the specified index from the myLibrary array
+  myLibrary.splice(index, 1);
 
+  // Re-render the book cards in the library section
+  displayBooks();
+
+  // Update the counts in the counters section
+  updateCounters();
+}
 
 //manage the counters for total books, read and unread books
 function updateCounters() {
-    const totalBooks = myLibrary.length;
-    const totalReadBooks = myLibrary.filter((book) => book.read).length;
-    const totalUnreadBooks = myLibrary.filter((book) => !book.read).length;
-  
-    const totalBooksCounter = document.querySelector('#total-books');
-    totalBooksCounter.textContent = totalBooks;
-  
-    const totalReadBooksCounter = document.querySelector('#total-read-books');
-    totalReadBooksCounter.textContent = totalReadBooks;
-  
-    const totalUnreadBooksCounter = document.querySelector('#total-unread-books');
-    totalUnreadBooksCounter.textContent = totalUnreadBooks;
-  }
-  
-  updateCounters();
+  const totalBooks = myLibrary.length;
+  const totalReadBooks = myLibrary.filter((book) => book.read).length;
+  const totalUnreadBooks = myLibrary.filter((book) => !book.read).length;
 
-  
-  function handleFormSubmit(event) {
-    event.preventDefault();
-  
-    addBookToLibrary();
-    displayBooks();
-  
-    // Clear the form inputs
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
-    document.getElementById('pages').value = '';
-    document.getElementById('language').selectedIndex = 0;
-    document.getElementById('read').checked = false;
-  
-    updateCounters();
-  }
-  
-  // Add an event listener to the "ADD NEW BOOK" button to handle form submit
-  const addButtonElement = document.querySelector('.add-book-btn');
-  addButtonElement.addEventListener('click', handleFormSubmit);
+  const totalBooksCounter = document.querySelector('#total-books');
+  totalBooksCounter.textContent = totalBooks;
+
+  const totalReadBooksCounter = document.querySelector('#total-read-books');
+  totalReadBooksCounter.textContent = totalReadBooks;
+
+  const totalUnreadBooksCounter = document.querySelector('#total-unread-books');
+  totalUnreadBooksCounter.textContent = totalUnreadBooks;
+}
+
+updateCounters();
+
+function formSubmitHandler(event) {
+  event.preventDefault();
+
+  addBookToLibrary();
+  displayBooks();
+
+  // Clear the form inputs
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('pages').value = '';
+  document.getElementById('language').selectedIndex = 0;
+  document.getElementById('read').checked = false;
+
+  updateCounters();
+}
+
+// Add an event listener to the "ADD NEW BOOK" button to handle form submit
+const addButtonElement = document.querySelector('.add-book-btn');
+addButtonElement.addEventListener('click', formSubmitHandler);
+
+
+function searchBooksHandler(event) {
+  event.preventDefault();
+
+  const searchInput = document
+    .getElementById('search')
+    .value.trim()
+    .toUpperCase();
+
+  displayBooks(searchInput);
+
+  //Clear the form input
+  document.getElementById('search').value = '';
+}
+
+// Add an event listener to the "Search" button to handle the search by name 
+const searchBtn = document.querySelector('.search-book-btn');
+searchBtn.addEventListener('click', searchBooksHandler);
+
+
+function showBooksHandler(status) {
+  displayBooks(status);
+}
+
+// Add an event listener to the "SHOW" buttons to handle to show all books or read or unread books
+const showAllBtn = document.querySelector('.show-all-btn');
+const showReadBtn = document.querySelector('.show-read-btn');
+const showUnreadBtn = document.querySelector('.show-unread-btn');
+
+showAllBtn.addEventListener('click', () => showBooksHandler(''));
+showReadBtn.addEventListener('click', () => showBooksHandler(true));
+showUnreadBtn.addEventListener('click', () => showBooksHandler(false));
