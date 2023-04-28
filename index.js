@@ -14,6 +14,46 @@ Book.prototype.toggleReadStatus = function () {
   this.read = !this.read;
 };
 
+Book.prototype.AddReadStatusBtn = function(read) {
+
+  const readButton = document.createElement("button");
+    readButton.classList.add("book-read-btn");
+    readButton.textContent = this.read ? "Mark as unread" : "Mark as read";
+
+    readButton.addEventListener("click", () => {
+      this.toggleReadStatus();
+      readButton.textContent = this.read ? "Mark as unread" : "Mark as read";
+      read.textContent = this.read ? "Read" : "Unread";
+      updateCounters();  
+    });
+    
+   
+    return readButton;
+
+}
+
+Book.prototype.toggleRemove = function (bookCard){
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("book-remove-btn");
+  removeButton.textContent = "Remove";
+
+  removeButton.addEventListener("click", () =>{
+    // Remove the book at the specified card index from the myLibrary array
+    myLibrary.splice(bookCard.getAttribute("key"))
+
+      // Re-render the book cards in the library section
+      displayBooks();
+  
+      // Update the counts in the counters section
+      updateCounters();
+  });
+  return removeButton
+
+
+
+}
+
+
 //Get the form input data to the library array
 function addBookToLibrary() {
   // Get user input from the form
@@ -122,25 +162,19 @@ function regenerateUPdateValue(books) {
     read.textContent = book.read ? "Read" : "Unread";
     bookCard.appendChild(read);
 
-    const readButton = document.createElement("button");
-    readButton.classList.add("book-read-btn");
-    readButton.textContent = book.read ? "Mark as unread" : "Mark as read";
-    readButton.addEventListener("click", () => {
-      book.toggleReadStatus();
-      read.textContent = book.read ? "Read" : "Unread";
-      readButton.textContent = book.read ? "Mark as unread" : "Mark as read";
-
-      updateCounters();
-    });
+    //Readstatus button card 
+     const readButton =  book.AddReadStatusBtn(read);   
     bookCard.appendChild(readButton);
+  
+    //set index to card
+    bookCard.setAttribute("key", index);
 
-    const removeButton = document.createElement("button");
-    removeButton.classList.add("book-remove-btn");
-    removeButton.textContent = "Remove";
-    removeButton.setAttribute("data-index", index);
-    removeButton.addEventListener("click", removeBookFromLibrary);
+
+    //remove button card
+    const removeButton = book.toggleRemove(bookCard);
     bookCard.appendChild(removeButton);
   
+    //append everythig to libraryContainer
     libraryContainer.appendChild(bookCard);  
     console.log(libraryContainer)
   });
@@ -149,16 +183,7 @@ function regenerateUPdateValue(books) {
 // Call the displayBooks function initially to display the book cards on the page
 displayBooks();
 
-function removeBookFromLibrary(index) {
-  // Remove the book at the specified index from the myLibrary array
-  myLibrary.splice(index, 1);
 
-  // Re-render the book cards in the library section
-  displayBooks();
-
-  // Update the counts in the counters section
-  updateCounters();
-}
 
 //manage the counters for total books, read and unread books
 function updateCounters() {
