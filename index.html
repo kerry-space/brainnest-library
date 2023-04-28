@@ -47,54 +47,29 @@
     </section>
     
     <section class="counters-section">
-        <h2>Book Counters</h2>
-        <div>
+        <div class="counters">
             <h3>Total books: <span id="total-books">0</span></h3>
             <img src="./images/star_black.png">
-            <h3>Total read books: <span id="total-read-books">0</span></h3>
+            <h3>Read books: <span id="total-read-books">0</span></h3>
             <img src="./images/star_black.png">
-            <h3>Total unread books: <span id="total-unread-books">0</span></h3>
+            <h3>Unread books: <span id="total-unread-books">0</span></h3>
         </div>
-
-        <form class="form-search">
-            <label for="search">Search Book:</label>
-            <input type="text" id="search" class="search-filter" name="search"  placeholder="Search book by title">
-            <button type="submit" class="show-btns search-book-btn">SEARCH</button>
-        </form>
-        <div class="">
+        <div class="show-books-btns">
+            <button class="show-btns show-all-btn">Show All Books</button>
             <button class="show-btns show-read-btn">Show Read Books</button>
             <button class="show-btns show-unread-btn">Show Unread Books</button>
-            <button class="show-btns show-all-btn">Show All Books</button>
-          </div>
+        </div>
+        <form class="form-search">
+            <label for="search">Search Book by title:</label>
+            <input type="text" id="search" name="search" placeholder="Enter book title">
+            <button type="submit" class="show-btns search-book-btn">SEARCH</button>
+        </form>
     </section>
 
     <section class="library-section">
         <h2>Library</h2>
         <div id="book-cards">
-            <!-- <div class="book-card">
-                <H2>LORD OF THE RINGS</H2>
-                <H3>BY J.R.R. TOLKIEN</H3>
-                <P>NUMBER OF PAGES - 1178</P>
-                <P>LANGUAGE - ENGLISH</P>
-                <button type="submit" class="book-read-btn">EDIT BOOK</button>
-                <button type="submit" class="book-remove-btn">DELETE BOOK</button>
-            </div>
-            <div class="book-card">
-                <H2>LORD OF THE RINGS</H2>
-                <H3>BY J.R.R. TOLKIEN</H3>
-                <P>NUMBER OF PAGES - 1178</P>
-                <P>LANGUAGE - ENGLISH</P>
-                <button type="submit" class="book-read-btn">EDIT BOOK</button>
-                <button type="submit" class="book-remove-btn">DELETE BOOK</button>
-             </div>
-            <div class="book-card">
-                <H2>LORD OF THE RINGS</H2>
-                <H3>BY J.R.R. TOLKIEN</H3>
-                <P>NUMBER OF PAGES - 1178</P>
-                <P>LANGUAGE - ENGLISH</P>
-                <button type="submit" class="book-read-btn">EDIT BOOK</button>
-                <button type="submit" class="book-remove-btn">DELETE BOOK</button>
-            </div>  -->
+
         </div>
     </section>
 </body>
