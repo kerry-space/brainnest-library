@@ -24,7 +24,7 @@ body {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 30vh 100%;
+  grid-template-rows: 1fr 3.75fr;
   grid-template-areas:
     'form counters'
     'form library';
@@ -85,7 +85,7 @@ input[type='checkbox'],
 }
 
 input[type='checkbox'] {
-  margin-top: -1px;
+  margin-top: 5px;
   margin-left: 15px;
 }
 
@@ -113,49 +113,42 @@ input[type='checkbox'] {
   color: var(--color-black);
 }
 
-/*  COUNTER SECTION */
+/*  COUNTER AND SEARCH SECTION */
 
-.counters-section{
-  grid-area: counters;
+.counters-section {
   background: linear-gradient(
     145deg,
     var(--color-gradient-left),
     var(--color-gradient-right)
   );
   font-family: var(--font-heavy);
+  padding: 1em 1em;
 }
 
-.counters-section > div{
+.counters {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
 }
 
-.counters-section h2 {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  margin-bottom: 1em;
-  text-align: center;
-}
-.counters-section h3 {
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+.counters h3 {
+  font-size: clamp(0.8rem, 1.5vw, 1.5rem);
   margin-bottom: 1em;
 }
 
-.counters-section img {
+.counters img {
   height: 20px;
   width: 20px;
 }
 
-.form-search{
+.show-books-btns{
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1em;
 }
 
-.show-btns{
+.show-btns {
   background-color: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-light);
@@ -163,9 +156,10 @@ input[type='checkbox'] {
   border: 2px solid var(--color-black);
   border-radius: 10px;
   padding: 10px;
-  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-size: clamp(0.9rem, 1vw, 1.5rem);
+  margin: 20px 20px;
+  width: 10em;
 }
-
 
 .show-btns:hover {
   background-color: var(--color-white);
@@ -173,19 +167,41 @@ input[type='checkbox'] {
   border: 2px solid var(--color-black);
 }
 
+
+.form-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 10px;
+}
+
+.form-search > input{
+  width: 17em;
+}
+
+.form-search > button{
+  margin-top: -1px;
+}
+
+.form-search > label{
+  font-size: clamp(0.9rem, 1vw, 1.5rem);
+  margin-top: -15px;
+}
+
 /* LIBRARY SECTION */
 
 .library-section {
   grid-area: library;
   background-color: var(--color-white);
-  
 }
 
-.library-section h2{
+.library-section h2 {
   text-align: center;
 }
 
-#book-cards.visible{
+#book-cards.visible {
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fit, 200px);
@@ -196,10 +212,7 @@ input[type='checkbox'] {
 }
 
 #book-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  justify-content: space-evenly;
-  gap: 20px;
+  display: none;
 }
 
 /* book cards */
@@ -245,9 +258,9 @@ input[type='checkbox'] {
 }
 
 .book-read-btn:hover {
-    background-color: var(--color-white);
-    color: var(--color-black);
-    border: 2px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 2px solid var(--color-black);
 }
 
 .book-remove-btn {
@@ -262,13 +275,10 @@ input[type='checkbox'] {
 }
 
 .book-remove-btn:hover {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    border: 2px solid var(--color-white);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
 }
-
-
-
 
 /* RESPONSIVENESS*/
 
@@ -288,29 +298,51 @@ input[type='checkbox'] {
   }
 }
 
-@media (max-width: 900px) {
 
-  .counters-section > div{
+
+@media (max-width: 900px) {
+  .counters-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        'counters buttons'
+        'counters buttons'
+        'search search';   
+    gap: 5px;  
+  }
+
+  .counters{
+    grid-area: counters;
     display: flex;
     flex-direction: column;
-    height: auto;
-    width: 100%;
-    align-items: center;
-    gap: 0;
+    gap: 5px;
+  } 
+
+  .show-books-btns{
+    grid-area: buttons;
+    display: flex;
+    flex-direction: column;
   }
 
-  .counters-section h3 {
-    padding: 10px 0;
-    margin: 0;
-    align-self: center;
+  .show-btns {
+    margin: 7px 7px;
   }
 
-  .counters-section p:last-of-type {
-    border-right: none;
+  .form-search {
+    grid-area: search;
   }
-
-  .counters-section img {
-    display: none;
+  
+  .form-search > input{
+    width: 15em;
+  }
+  
+  .form-search > button{
+    margin-top: -5px;
+    width: 5rem;
+  }
+  
+  .form-search > label{
+    margin-top: -20px;
   }
 
 }
