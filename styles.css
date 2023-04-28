@@ -196,7 +196,10 @@ input[type='checkbox'] {
 }
 
 #book-cards {
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: space-evenly;
+  gap: 20px;
 }
 
 /* book cards */

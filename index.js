@@ -57,7 +57,7 @@ function displayBooks() {
   showAllBooks.addEventListener("click", showAllBtn);
 }
 
-function bt() {}
+
 
 //filter search func
 function filterSearch(event) {
@@ -92,12 +92,13 @@ function showAllBtn() {
   regenerateUPdateValue(myLibrary);
 }
 
-function regenerateUPdateValue(myLibrary) {
+function regenerateUPdateValue(books) {
   const libraryContainer = document.getElementById("book-cards");
 
   libraryContainer.innerHTML = "";
-
-  myLibrary.forEach((book, index) => {
+  
+  
+  books.forEach((book, index) => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
 
@@ -139,8 +140,9 @@ function regenerateUPdateValue(myLibrary) {
     removeButton.setAttribute("data-index", index);
     removeButton.addEventListener("click", removeBookFromLibrary);
     bookCard.appendChild(removeButton);
-
-    libraryContainer.appendChild(bookCard);
+  
+    libraryContainer.appendChild(bookCard);  
+    console.log(libraryContainer)
   });
 }
 
