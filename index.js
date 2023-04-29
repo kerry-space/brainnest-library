@@ -56,8 +56,13 @@ function addBookToLibrary() {
   const language = document.getElementById("language").value;
   const read = document.getElementById("read").checked;
 
-  //validate data from
-  if (title.trim() === "" || author.trim() === "") {
+  //validate data from form
+  if (
+    title.trim() === '' ||
+    author.trim() === '' ||
+    pages === '' ||
+    language === '') {
+    alert('All fields are mandatory');
     return;
   }
 
@@ -93,7 +98,7 @@ function displayBooks() {
 //filter search func
 function filterSearch(event) {
   event.preventDefault();
-  const title = document.getElementById("search").value;
+  const title = document.getElementById("search").value.trim();
 
   if (title.trim() === "") {
     return;
