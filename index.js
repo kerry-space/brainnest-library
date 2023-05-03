@@ -200,17 +200,12 @@ function handleFormSubmit(event) {
 
   addBookToLibrary();
   displayBooks();
-
-  // Clear the form inputs
-  document.getElementById("title").value = "";
-  document.getElementById("author").value = "";
-  document.getElementById("pages").value = "";
-  document.getElementById("language").selectedIndex = 0;
-  document.getElementById("read").checked = false;
-
   updateCounters();
+
+   // Clear the form inputs
+  event.target.reset();
 }
 
-// Add an event listener to the "ADD NEW BOOK" button to handle form submit
-const addButtonElement = document.querySelector(".add-book-btn");
-addButtonElement.addEventListener("click", handleFormSubmit);
+// Add an event listener to the "ADD NEW BOOK" form to handle form submit
+const addNewBook = document.getElementById("submit-book-form");
+addNewBook.addEventListener("submit", handleFormSubmit);
