@@ -1,5 +1,7 @@
 import { Book } from "./book.js";
 import { displayBooks, updateCounters } from "./displayBooks.js";
+import "./styles.css"
+
 let myLibrary = [];
 
 function handleFormSubmit(event) {
