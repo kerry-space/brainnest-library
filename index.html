@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <script type="module" src="./bundle.js"></script>
+    <title>My Library</title>
+</head>
+
+<body>
+
+    <section class="form-section">
+        <h1>MY <br>LIBRARY</h1>
+        <P>HERE IS A PERSONAL DIGITAL LIBRARY FOR YOUR DAILY READS. THIS PLATFORM ALLOWS YOU TO
+            KEEP TRACK OF WHAT YOU’VE READ OR ARE CURRENTLY READING.</P>
+        <form action="#" method="post" id="submit-book-form">
+            <label for="title">*BOOK TITLE:</label>
+            <input type="text" id="title" name="title" placeholder="Enter title of book" minlength="5" maxlength="20"
+                autofocus required />
+
+            <label for="author">*AUTHOR:</label>
+            <input type="text" id="author" name="author" placeholder="Enter author of book"
+                pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" minlength="5" maxlength="20"
+                title="No numbers allowed. Name Should start with a letter." required />
+
+            <label for="pages">*NUMBER OF PAGES:</label>
+            <input type="number" id="pages" name="pages" placeholder="Enter total number of pages" min="1" max="1500"
+                required />
+
+            <label for="language">*LANGUAGE:</label>
+            <select id="language" name="language" required>
+                <option value="" disabled selected>Select Language</option>
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Other">Other</option>
+            </select><br><br>
+
+
+            <div class="checkbox">
+                <label for="read">*DID YOU FINISH THIS BOOK?</label>
+                <input type="checkbox" id="read" name="read">
+            </div>
+
+            <button type="submit" class="add-book-btn">ADD NEW BOOK</button>
+        </form>
+
+    </section>
+
+    <section class="counters-section">
+        <div class="counters">
+            <h3>Total books: <span id="total-books">0</span></h3>
+            <img src="./images/star_black.png">
+            <h3>Read books: <span id="total-read-books">0</span></h3>
+            <img src="./images/star_black.png">
+            <h3>Unread books: <span id="total-unread-books">0</span></h3>
+        </div>
+        <div class="show-books-btns">
+            <button class="show-btns show-all-btn">Show All Books</button>
+            <button class="show-btns show-read-btn">Show Read Books</button>
+            <button class="show-btns show-unread-btn">Show Unread Books</button>
+        </div>
+        <form class="form-search">
+            <label for="search">Search Book by title:</label>
+            <input type="text" id="search" name="search" placeholder="Enter book title">
+            <button type="submit" class="show-btns search-book-btn">SEARCH</button>
+        </form>
+    </section>
+
+    <section class="library-section">
+        <h2>Library</h2>
+        <div id="book-cards">
+
+        </div>
+    </section>
+</body>
+</body>
+
+</html>
