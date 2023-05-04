@@ -1,10 +1,26 @@
 import { Book } from "./book.js";
-import { displayBooks, updateCounters } from "./displayBooks.js";
+import { Card } from "./card.js";
+import { display,updateCounters } from "./displayBooks.js";
 import "./styles.css"
 
-let myLibrary = [];
+let bookCards = [];
 
 function handleFormSubmit(event) {
+ 
+  addBookToLibrary(event)
+
+  // Call the displayBooks function initially to display the book cards on the page
+ display()
+  
+
+  //manage the counters for total books, read and unread books
+  updateCounters();
+  // Clear the form inputs
+  event.target.reset();
+}
+
+
+function addBookToLibrary(event){
   event.preventDefault();
   // Get user input from the form
   const title = document.getElementById("title").value;
@@ -25,22 +41,18 @@ function handleFormSubmit(event) {
   }
 
   // Create a new Book object with the user input
-  const newBook = new Book(title, author, pages, language, read);
+ 
+  
+  const newCard  = new Card(title, author, pages, language, read, bookCards.length)
+  
+  bookCards.push(newCard)
 
-  //// Add the new Book object to the myLibrary array
-  newBook.addBookToLibrary(newBook);
 
-  // Call the displayBooks function initially to display the book cards on the page
-  displayBooks();
 
-  //manage the counters for total books, read and unread books
-  updateCounters();
-  // Clear the form inputs
-  event.target.reset();
 }
 
 // Add an event listener to the "ADD NEW BOOK" form to handle form submit
 const addNewBook = document.getElementById("submit-book-form");
 addNewBook.addEventListener("submit", handleFormSubmit);
 
-export { myLibrary };
+export { bookCards };
