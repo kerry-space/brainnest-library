@@ -1,5 +1,5 @@
 import { Book } from "./book";
-import {updateCounters,bookCards} from "./index"
+import {updateCounters,bookCards} from "."
 
 class Card extends Book {
     

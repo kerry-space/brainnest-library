@@ -1,7 +1,7 @@
 import { Book } from "./book.js";
 import { Card } from "./card.js";
 import { eventListener} from "./eventListener.js";
-import "./styles.css"
+//import "./styles.css"
 
 let bookCards = [];
 
@@ -56,8 +56,13 @@ function handleFormSubmit(event) {
   event.target.reset();
 }
 
-// Add an event listener to the "ADD NEW BOOK" form to handle form submit
-const addNewBook = document.getElementById("submit-book-form");
-addNewBook.addEventListener("submit", handleFormSubmit);
 
-export { bookCards,updateCounters };
+
+// Add an event listener to the "ADD NEW BOOK" form to handle form submit
+//use the DOMContentLoaded event to ensure that your JavaScript code is executed after the DOM has loaded.
+document.addEventListener('DOMContentLoaded', function() {
+  const addNewBook = document.getElementById("submit-book-form");
+  addNewBook.addEventListener("submit", handleFormSubmit);
+});
+
+export { bookCards,updateCounters, getUserInput};
