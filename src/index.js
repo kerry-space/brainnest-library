@@ -1,58 +1,63 @@
 import { Book } from "./book.js";
 import { Card } from "./card.js";
-import { display,updateCounters } from "./displayBooks.js";
+import { eventListener} from "./eventListener.js";
 import "./styles.css"
 
 let bookCards = [];
 
+
+function getUserInput(){
+  // Get user input from the form
+  const title = document.getElementById("title").value.trim();
+  const author = document.getElementById("author").value.trim();
+  const pages = document.getElementById("pages").value.trim();
+  const language = document.getElementById("language").value.trim();
+  const read = document.getElementById("read").checked;
+  return {title, author, pages, language, read}
+}
+
+function addBookToLibrary(event){
+  event.preventDefault();
+  const {title, author, pages, language, read} = getUserInput();
+
+  // Create a new instance of card object with the user input
+  const newCard  = new Card(title, author, pages, language, read, bookCards.length)
+
+  bookCards.push(newCard)
+
+}
+
+
+function updateCounters(){
+  const totalBooks = bookCards.length;
+  const totalReadBooks = bookCards.filter((book) => book.read).length;
+  const totalUnreadBooks = bookCards.filter((book) => !book.read).length;
+
+  const totalBooksCounter = document.querySelector("#total-books");
+  totalBooksCounter.textContent = totalBooks;
+
+  const totalReadBooksCounter = document.querySelector("#total-read-books");
+  totalReadBooksCounter.textContent = totalReadBooks;
+
+  const totalUnreadBooksCounter = document.querySelector("#total-unread-books");
+  totalUnreadBooksCounter.textContent = totalUnreadBooks;
+}
+
+
 function handleFormSubmit(event) {
  
   addBookToLibrary(event)
-
   // Call the displayBooks function initially to display the book cards on the page
- display()
+  eventListener()
   
-
   //manage the counters for total books, read and unread books
   updateCounters();
   // Clear the form inputs
   event.target.reset();
 }
 
-
-function addBookToLibrary(event){
-  event.preventDefault();
-  // Get user input from the form
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const pages = document.getElementById("pages").value;
-  const language = document.getElementById("language").value;
-  const read = document.getElementById("read").checked;
-
-  //validate data from form
-  if (
-    title.trim() === "" ||
-    author.trim() === "" ||
-    pages === "" ||
-    language === ""
-  ) {
-    alert("All fields are mandatory");
-    return;
-  }
-
-  // Create a new Book object with the user input
- 
-  
-  const newCard  = new Card(title, author, pages, language, read, bookCards.length)
-  
-  bookCards.push(newCard)
-
-
-
-}
-
 // Add an event listener to the "ADD NEW BOOK" form to handle form submit
 const addNewBook = document.getElementById("submit-book-form");
 addNewBook.addEventListener("submit", handleFormSubmit);
 
-export { bookCards };
+export { bookCards,updateCounters };

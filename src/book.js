@@ -1,6 +1,3 @@
-import {myLibrary} from "./index.js"
-import {updateCounters ,displayBooks} from "./displayBooks.js"
-
 
 class Book {
 
@@ -12,12 +9,7 @@ class Book {
         this.read = read;
     }
     
-
 }
-
-
-
-
 
 
 export {Book};

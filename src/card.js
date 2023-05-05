@@ -1,27 +1,20 @@
 import { Book } from "./book";
-import {updateCounters,display} from "./displayBooks"
-import {bookCards} from "./index"
+import {updateCounters,bookCards} from "./index"
 
 class Card extends Book {
+    
     constructor(title, author, pages, language, read, index){
      super( title, author, pages, language, read)
-           //Render the book cards on the Library
-           this.index = index; ;
+        
+        this.index = index;
+        //Render the book cards on the Library
         this.createCard()
-        
-        
-  
     }
-
-
-
 
 
 
  createCard() {
   const libraryContainer = document.getElementById("book-cards");
-
-  
 
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
@@ -58,14 +51,10 @@ class Card extends Book {
     const removeButton = this.toggleRemove(bookCard);
     bookCard.appendChild(removeButton);
 
-      // Re-render the book cards in the library section
-      display();
-
-      // Update the counts in the counters section
-      updateCounters();
+  
     //append everythig to libraryContainer
     libraryContainer.appendChild(bookCard);
-   
+
  
     }
 
@@ -99,11 +88,25 @@ class Card extends Book {
         removeButton.textContent = "Remove";
 
         removeButton.addEventListener("click", () => {
+             
+             // Remove the book card from the DOM
+            bookCard.remove();
+
+            const cardIndex = parseInt(bookCard.getAttribute("data-index"));
+
             // Remove the book at the specified card index from the myLibrary array
-  
-            
-        bookCards.splice(bookCard.getAttribute("data-index"),1);
-           
+            bookCards.splice(cardIndex,1);
+     
+            // Re-index the remaining book cards
+            //finds all child elements of "book-cards" with the class "book-card" using querySelectorAll()
+            const librarySection = document.querySelector("#book-cards");
+            librarySection.querySelectorAll(".book-card").forEach((card, index) => {
+                 //sets its "data-index" attribute to its new index in the bookCards array.
+                 card.setAttribute("data-index", index);
+            });
+          
+           // Update the counters
+            updateCounters();
           
         });
         return removeButton;
