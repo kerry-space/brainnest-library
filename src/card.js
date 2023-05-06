@@ -1,5 +1,5 @@
-import { Book } from "./book";
-import {updateCounters,bookCards} from "."
+import { Book } from "./book.js";
+import {updateCounters,bookCards} from "./index.js"
 
 class Card extends Book {
     

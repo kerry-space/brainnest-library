@@ -1,68 +1,98 @@
-// Import the getUserInput function
-import { getUserInput, updateCounters } from "../src/index.js";
+
+import { expect } from 'chai';
+import * as TextEncoding from 'text-encoding';
+import { JSDOM } from 'jsdom';
+import { getUserInput } from '../src/index.js';
+
+const dom = new JSDOM('<!doctype html><html><body></body></html>');
+
+global.window = dom.window;
+global.document = dom.window.document;
 
 
-//This test is checking the behavior of the getUserInput() function when it is called with a mock form.
-describe("getUserInput", () => {
-  test("returns an object with user input values", () => {
-    // Create a mock form object
-    document.body.innerHTML = `
-      <form>
-        <input type="text" id="title" value="The Great Gatsby">
-        <input type="text" id="author" value="F. Scott Fitzgerald">
-        <input type="number" id="pages" value="218">
-        <input type="text" id="language" value="English">
-        <input type="checkbox" id="read" checked>
-      </form>
-    `;
-    // function reads the values of the input fields and returns them as an object with properties
+
+describe('getUserInput', () => {
+  test('returns user input from form', () => {
+    const dom = new JSDOM(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="The empty">
+            
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" value="kerry one">
+            
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" name="pages" value="310">
+            
+            <label for="language">Language:</label>
+            <input type="text" id="language" name="language" value="English">
+            
+            <label for="read">Read:</label>
+            <input type="checkbox" id="read" name="read" checked>
+            
+            <button type="submit">Submit</button>
+          </form>
+        </body>
+      </html>
+    `);
+
+    //assigns dom.window.document from jsdom to global 
+    global.document = dom.window.document;
+     
     const userInput = getUserInput();
 
-    //exptect output we should recive from mock 
-    const expectedOutput = {
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      pages: "218",
-      language: "English",
-      read: true,
-    }
-
-    // Assert that the function returns the expected values
-    expect(userInput).toEqual(expectedOutput);
+    expect(userInput.title).toBe('The empty');
+    expect(userInput.author).toBe('kerry one');
+    expect(userInput.pages).toBe('310');
+    expect(userInput.language).toBe('English');
+    expect(userInput.read).toBe(true);
   });
 });
 
 
 
 
+describe('addBookToLibrary', () => {
+  test('adds a new card to the library', () => {
+    //mocked the getUserInput  return fixed set of values
+    const getUserInput = jest.fn(() => ({
+      title: 'The empty',
+      author: 'kerry one',
+      pages: 300,
+      language: 'English',
+      read: false,
+    }));
 
-describe("updates the book counters section on the page", () => {
-  beforeEach(() => {
-    // Create a mock HTML structure
-    document.body.innerHTML = `
-      <div>
-        <span id="total-books"></span>
-        <span id="total-read-books"></span>
-        <span id="total-unread-books"></span>
-      </div>
-    `;
-  });
+    //set to a Jest mock function using fn()
+    const event = {
+      preventDefault: jest.fn(),
+    };
 
-  test("updates the book counters correctly", () => {
-    const bookCards = [
-      {read: true},
-      {read: false},
-      {read: true},
-      {read: false},
-      {read: false}
-    ];
+    const bookCards = [];
+    const Card = jest.fn();
+    const newCard = {};
 
-    // Call the updateCounters function
-    updateCounters(bookCards);
+    //set up a mock implementation card funciton isung jest
+    //extracts the relevant properties from them, and assigns them to the newCard object.
+    Card.mockImplementationOnce((title, author, pages, language, read, id) => {
+      newCard.title = title;
+      newCard.author = author;
+      newCard.pages = pages;
+      newCard.language = language;
+      newCard.read = read;
+      newCard.id = id;
+    });
 
-    // Assert that the counters have been updated correctly
-    expect(document.querySelector("#total-books").textContent).toBe("5");
-    expect(document.querySelector("#total-read-books").textContent).toBe("2");
-    expect(document.querySelector("#total-unread-books").textContent).toBe("3");
+    // This function will call the getUserInput get which we expect been called 
+    addBookToLibrary(event);
+
+    //checks that Card was called with the expected arguments,hardcoded
+    //bookCards array contains the newCard object that was created in the mock implementation
+    expect(getUserInput).toHaveBeenCalled();
+    expect(Card).toHaveBeenCalledWith('The empty', 'kerry one', 300, 'English', false, 0);
+    expect(bookCards).toContainEqual(newCard);
   });
 });

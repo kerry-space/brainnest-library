@@ -65,4 +65,4 @@ document.addEventListener('DOMContentLoaded', function() {
   addNewBook.addEventListener("submit", handleFormSubmit);
 });
 
-export { bookCards,updateCounters, getUserInput};
+export { bookCards,updateCounters, getUserInput,addBookToLibrary};

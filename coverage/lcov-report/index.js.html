@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.62% </span>
+                <span class="strong">27.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/29</span>
+                <span class='fraction'>8/29</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">29.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>8/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -162,18 +162,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -229,19 +229,19 @@ function <span class="fstat-no" title="function not covered" >addBookToLibrary(<
 }
 &nbsp;
 &nbsp;
-function updateCounters(){
-  const totalBooks = bookCards.length;
-  const totalReadBooks = bookCards.filter(<span class="fstat-no" title="function not covered" >(b</span>ook) =&gt; <span class="cstat-no" title="statement not covered" >book.read)</span>.length;
-  const totalUnreadBooks = bookCards.filter(<span class="fstat-no" title="function not covered" >(b</span>ook) =&gt; <span class="cstat-no" title="statement not covered" >!book.read)</span>.length;
+function <span class="fstat-no" title="function not covered" >updateCounters(</span>){
+  const totalBooks = <span class="cstat-no" title="statement not covered" >bookCards.length;</span>
+  const totalReadBooks = <span class="cstat-no" title="statement not covered" >bookCards.filter(<span class="fstat-no" title="function not covered" >(b</span>ook) =&gt; <span class="cstat-no" title="statement not covered" >book.read)</span>.length;</span>
+  const totalUnreadBooks = <span class="cstat-no" title="statement not covered" >bookCards.filter(<span class="fstat-no" title="function not covered" >(b</span>ook) =&gt; <span class="cstat-no" title="statement not covered" >!book.read)</span>.length;</span>
 &nbsp;
-  const totalBooksCounter = document.querySelector("#total-books");
-  totalBooksCounter.textContent = totalBooks;
+  const totalBooksCounter = <span class="cstat-no" title="statement not covered" >document.querySelector("#total-books");</span>
+<span class="cstat-no" title="statement not covered" >  totalBooksCounter.textContent = totalBooks;</span>
 &nbsp;
-  const totalReadBooksCounter = document.querySelector("#total-read-books");
-  totalReadBooksCounter.textContent = totalReadBooks;
+  const totalReadBooksCounter = <span class="cstat-no" title="statement not covered" >document.querySelector("#total-read-books");</span>
+<span class="cstat-no" title="statement not covered" >  totalReadBooksCounter.textContent = totalReadBooks;</span>
 &nbsp;
-  const totalUnreadBooksCounter = document.querySelector("#total-unread-books");
-  totalUnreadBooksCounter.textContent = totalUnreadBooks;
+  const totalUnreadBooksCounter = <span class="cstat-no" title="statement not covered" >document.querySelector("#total-unread-books");</span>
+<span class="cstat-no" title="statement not covered" >  totalUnreadBooksCounter.textContent = totalUnreadBooks;</span>
 }
 &nbsp;
 &nbsp;
@@ -274,7 +274,7 @@ export { bookCards,updateCounters, getUserInput};
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-05T16:28:05.495Z
+                at 2023-05-06T12:59:36.335Z
             </div>
         <script src="prettify.js"></script>
         <script>
